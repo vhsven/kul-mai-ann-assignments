@@ -1,0 +1,13 @@
+N = 500;
+p = 50;
+q = 10;
+X = randn(p, N);
+avg = mean(mean(X));
+X_norm = X - avg;
+[E, d_cumquality] = mypca(X_norm, q);
+plot(d_cumquality);
+F = E;
+quality = d_cumquality(q);
+Z = E'*X_norm;
+X_hat = F*Z + avg;
+mserror = sqrt(mean(mean((X-X_hat).^2)));
